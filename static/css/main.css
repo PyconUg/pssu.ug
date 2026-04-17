@@ -1,0 +1,55 @@
+@import "tailwindcss";
+
+@theme {
+    --color-pssu-blue: #3b82f6;
+    --color-pssu-green: #22c55e;
+    --color-pssu-yellow: #f59e0b;
+
+    --color-pssu-blue-50: #eff6ff;
+    --color-pssu-blue-100: #dbeafe;
+    --color-pssu-blue-200: #bfdbfe;
+    --color-pssu-blue-300: #93c5fd;
+    --color-pssu-blue-400: #60a5fa;
+    --color-pssu-blue-500: #3b82f6;
+    --color-pssu-blue-600: #2563eb;
+    --color-pssu-blue-700: #1d4ed8;
+    --color-pssu-blue-800: #1e40af;
+    --color-pssu-blue-900: #1e3a8a;
+    --color-pssu-blue-950: #172554;
+}
+
+@layer base {
+    :root {
+        --font-sans: "Inter", system-ui, sans-serif;
+    }
+
+    body {
+        @apply bg-slate-50 font-sans text-slate-900;
+    }
+
+    a {
+        @apply text-pssu-blue-600 hover:text-pssu-blue-800 underline;
+    }
+}
+
+@layer components {
+    .btn {
+        @apply inline-flex items-center justify-center rounded-full bg-pssu-blue-600 px-6 py-3 text-sm font-semibold text-white shadow-lg transition hover:bg-pssu-blue-700;
+    }
+
+    .btn-secondary {
+        @apply inline-flex items-center justify-center rounded-full bg-slate-900 px-6 py-3 text-sm font-semibold text-white shadow-lg transition hover:bg-slate-700;
+    }
+
+    .heading-section {
+        @apply text-3xl font-semibold text-slate-900;
+    }
+
+    .heading-card {
+        @apply text-xl font-semibold text-slate-900 mb-3;
+    }
+
+    .card {
+        @apply bg-white rounded-3xl p-8 shadow-lg;
+    }
+}

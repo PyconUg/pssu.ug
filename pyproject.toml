@@ -1,0 +1,15 @@
+[project]
+name = "pssu-ug"
+version = "0.1.0"
+description = "PyCon Uganda website built with Django and Tailwind CSS."
+requires-python = ">=3.11"
+dependencies = [
+    "Django==5.0.12"
+]
+
+[build-system]
+requires = ["setuptools>=61.0", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[tool.setuptools]
+packages = ["core", "website"]

@@ -1,0 +1,24 @@
+{
+  "site": {
+    "name": "Python Software Society of Uganda",
+    "short_name": "PSSU",
+    "domain": "https://pssu.ug",
+    "description": "Promoting Python programming and fostering community growth in Uganda",
+    "phase": "coming_soon",
+    "timezone": "Africa/Kampala"
+  },
+  "contact": {
+    "email": "info@pssu.ug",
+    "social": {
+      "twitter": "https://twitter.com/pssu_ug",
+      "linkedin": "https://linkedin.com/company/pssu",
+      "github": "https://github.com/pssu-ug"
+    }
+  },
+  "features": {
+    "learning_resources": true,
+    "community_events": true,
+    "career_support": true,
+    "newsletter": false
+  }
+}
