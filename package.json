@@ -5,9 +5,7 @@
   "description": "Python Software Society of Uganda website",
   "scripts": {
     "tailwind": "npx @tailwindcss/cli -i ./static/css/main.css -o ./static/vendor/main.css",
-    "tailwind-w": "npx @tailwindcss/cli -i ./static/css/main.css -o ./static/vendor/main.css --watch",
-    "build-css": "npm run tailwind",
-    "watch-css": "npm run tailwind-w"
+    "tailwind:watch": "npx @tailwindcss/cli -i ./static/css/main.css -o ./static/vendor/main.css --watch"
   },
   "dependencies": {
     "@tailwindcss/cli": "^4.0.5",
