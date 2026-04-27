@@ -1,0 +1,315 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="bg-gradient-to-r from-cyan-500 to-sky-700 text-white py-14 px-6 text-center">
+    <p class="text-sm uppercase tracking-widest text-cyan-100 mb-2">PyCon Africa — {{ country_name }} Delegation</p>
+    <h1 class="text-3xl sm:text-4xl font-semibold">Application Form</h1>
+</div>
+
+<div class="mx-auto max-w-2xl px-6 py-12">
+
+    <!-- Description -->
+    <div class="bg-white rounded-2xl p-6 shadow-sm border border-slate-100 mb-8">
+        <p class="text-slate-700 leading-relaxed mb-4">
+            We are selecting participants from <strong>{{ country_name }}</strong> to attend PyCon Africa in Uganda.
+            This opportunity is for passionate individuals in tech who are eager to learn, connect, and represent
+            {{ country_name }} on an international stage.
+        </p>
+        <p class="text-sm font-semibold text-slate-800 mb-2">Important Requirements:</p>
+        <ul class="text-sm text-slate-600 space-y-1 list-disc list-inside">
+            <li>Applicants must be 18 years or older</li>
+            <li>Must have (or be able to obtain): National ID, Valid Passport, and other required travel/legal documents</li>
+        </ul>
+    </div>
+
+    <form method="post" novalidate>
+        {% csrf_token %}
+
+        <!-- Section 1 -->
+        <section class="mb-8">
+            <h2 class="text-lg font-semibold text-slate-800 border-b border-slate-200 pb-2 mb-5">
+                Section 1 — Personal Information <span class="text-red-500 text-sm font-normal">(Required)</span>
+            </h2>
+            <div class="space-y-4">
+                <div>
+                    <label class="block text-sm font-medium text-slate-700 mb-1" for="full_name">Full Name <span class="text-red-500">*</span></label>
+                    <input type="text" id="full_name" name="full_name" required
+                        class="w-full rounded-lg border border-slate-300 px-4 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-sky-500" />
+                </div>
+                <div>
+                    <label class="block text-sm font-medium text-slate-700 mb-1" for="email">Email Address <span class="text-red-500">*</span></label>
+                    <input type="email" id="email" name="email" required
+                        class="w-full rounded-lg border border-slate-300 px-4 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-sky-500" />
+                </div>
+                <div>
+                    <label class="block text-sm font-medium text-slate-700 mb-1" for="phone">Phone Number <span class="text-slate-400 font-normal">(WhatsApp preferred)</span> <span class="text-red-500">*</span></label>
+                    <input type="tel" id="phone" name="phone" required
+                        class="w-full rounded-lg border border-slate-300 px-4 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-sky-500" />
+                </div>
+                <div>
+                    <label class="block text-sm font-medium text-slate-700 mb-1" for="city">City / District in {{ country_name }} <span class="text-red-500">*</span></label>
+                    <input type="text" id="city" name="city" required
+                        class="w-full rounded-lg border border-slate-300 px-4 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-sky-500" />
+                </div>
+                <div>
+                    <label class="block text-sm font-medium text-slate-700 mb-1" for="dob">Date of Birth <span class="text-red-500">*</span></label>
+                    <input type="date" id="dob" name="dob" required
+                        class="w-full rounded-lg border border-slate-300 px-4 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-sky-500" />
+                </div>
+                <div>
+                    <label class="block text-sm font-medium text-slate-700 mb-2">Are you 18 years or older? <span class="text-red-500">*</span></label>
+                    <div class="space-y-2">
+                        <label class="flex items-center gap-2 text-sm text-slate-700 cursor-pointer">
+                            <input type="radio" name="is_18" value="yes" required class="accent-sky-600" /> Yes
+                        </label>
+                        <label class="flex items-center gap-2 text-sm cursor-pointer" id="no-label">
+                            <input type="radio" name="is_18" value="no" id="age-no" class="accent-red-500" /> No
+                        </label>
+                    </div>
+                    <p id="age-warning" class="hidden mt-2 text-sm text-red-600 font-medium">
+                        Sorry, you must be 18 or older to apply.
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section 2 -->
+        <section class="mb-8">
+            <h2 class="text-lg font-semibold text-slate-800 border-b border-slate-200 pb-2 mb-5">
+                Section 2 — Background &amp; Skills
+            </h2>
+            <div class="space-y-4">
+                <div>
+                    <label class="block text-sm font-medium text-slate-700 mb-2">What is your current status? <span class="text-red-500">*</span></label>
+                    <div class="space-y-2">
+                        {% for val, label in status_choices %}
+                        <label class="flex items-center gap-2 text-sm text-slate-700 cursor-pointer">
+                            <input type="radio" name="status" value="{{ val }}" required class="accent-sky-600" /> {{ label }}
+                        </label>
+                        {% endfor %}
+                    </div>
+                </div>
+                <div>
+                    <label class="block text-sm font-medium text-slate-700 mb-1" for="field">Field of study / work <span class="text-red-500">*</span></label>
+                    <input type="text" id="field" name="field" required
+                        class="w-full rounded-lg border border-slate-300 px-4 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-sky-500" />
+                </div>
+                <div>
+                    <label class="block text-sm font-medium text-slate-700 mb-2">How would you rate your Python skills? <span class="text-red-500">*</span></label>
+                    <div class="space-y-2">
+                        {% for val, label in python_level_choices %}
+                        <label class="flex items-center gap-2 text-sm text-slate-700 cursor-pointer">
+                            <input type="radio" name="python_level" value="{{ val }}" required class="accent-sky-600" /> {{ label }}
+                        </label>
+                        {% endfor %}
+                    </div>
+                </div>
+                <div>
+                    <label class="block text-sm font-medium text-slate-700 mb-2">How long have you been learning/using Python? <span class="text-red-500">*</span></label>
+                    <div class="space-y-2">
+                        {% for val, label in python_duration_choices %}
+                        <label class="flex items-center gap-2 text-sm text-slate-700 cursor-pointer">
+                            <input type="radio" name="python_duration" value="{{ val }}" required class="accent-sky-600" /> {{ label }}
+                        </label>
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section 3 -->
+        <section class="mb-8">
+            <h2 class="text-lg font-semibold text-slate-800 border-b border-slate-200 pb-2 mb-5">
+                Section 3 — Motivation
+            </h2>
+            <div class="space-y-4">
+                <div>
+                    <label class="block text-sm font-medium text-slate-700 mb-1" for="why_attend">Why do you want to attend PyCon Africa? <span class="text-red-500">*</span></label>
+                    <textarea id="why_attend" name="why_attend" rows="4" required
+                        class="w-full rounded-lg border border-slate-300 px-4 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-sky-500 resize-y"></textarea>
+                </div>
+                <div>
+                    <label class="block text-sm font-medium text-slate-700 mb-1" for="hope_to_gain">What do you hope to gain from this experience? <span class="text-red-500">*</span></label>
+                    <textarea id="hope_to_gain" name="hope_to_gain" rows="4" required
+                        class="w-full rounded-lg border border-slate-300 px-4 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-sky-500 resize-y"></textarea>
+                </div>
+                <div>
+                    <label class="block text-sm font-medium text-slate-700 mb-2">Which areas interest you most? <span class="text-slate-400 font-normal">(Select all that apply)</span></label>
+                    <div class="space-y-2">
+                        {% for val, label in interest_choices %}
+                        <label class="flex items-center gap-2 text-sm text-slate-700 cursor-pointer">
+                            <input type="checkbox" name="interests" value="{{ val }}" class="accent-sky-600 rounded" /> {{ label }}
+                        </label>
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section 4 -->
+        <section class="mb-8">
+            <h2 class="text-lg font-semibold text-slate-800 border-b border-slate-200 pb-2 mb-5">
+                Section 4 — Community &amp; Impact
+            </h2>
+            <div class="space-y-4">
+                <div>
+                    <label class="block text-sm font-medium text-slate-700 mb-1" for="community">Are you part of any tech community?</label>
+                    <input type="text" id="community" name="community"
+                        class="w-full rounded-lg border border-slate-300 px-4 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-sky-500" />
+                </div>
+                <div>
+                    <label class="block text-sm font-medium text-slate-700 mb-1" for="contributions">Have you contributed to open source or tech events?</label>
+                    <textarea id="contributions" name="contributions" rows="4"
+                        class="w-full rounded-lg border border-slate-300 px-4 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-sky-500 resize-y"></textarea>
+                </div>
+                <div>
+                    <label class="block text-sm font-medium text-slate-700 mb-1" for="knowledge_sharing">How will you share knowledge after the conference? <span class="text-red-500">*</span></label>
+                    <textarea id="knowledge_sharing" name="knowledge_sharing" rows="4" required
+                        class="w-full rounded-lg border border-slate-300 px-4 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-sky-500 resize-y"></textarea>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section 5 -->
+        <section class="mb-8">
+            <h2 class="text-lg font-semibold text-slate-800 border-b border-slate-200 pb-2 mb-5">
+                Section 5 — Representation &amp; Commitment
+            </h2>
+            <div class="space-y-4">
+                <div>
+                    <p class="text-sm font-medium text-slate-700 mb-3">Are you willing to: <span class="text-red-500">*</span></p>
+                    <div class="space-y-3">
+                        <div>
+                            <p class="text-sm text-slate-600 mb-1">Attend all conference days?</p>
+                            <div class="flex gap-6">
+                                <label class="flex items-center gap-2 text-sm text-slate-700 cursor-pointer">
+                                    <input type="radio" name="attend_all" value="yes" required class="accent-sky-600" /> Yes
+                                </label>
+                                <label class="flex items-center gap-2 text-sm text-slate-700 cursor-pointer">
+                                    <input type="radio" name="attend_all" value="no" class="accent-sky-600" /> No
+                                </label>
+                            </div>
+                        </div>
+                        <div>
+                            <p class="text-sm text-slate-600 mb-1">Represent {{ country_name }} professionally?</p>
+                            <div class="flex gap-6">
+                                <label class="flex items-center gap-2 text-sm text-slate-700 cursor-pointer">
+                                    <input type="radio" name="represent_professionally" value="yes" required class="accent-sky-600" /> Yes
+                                </label>
+                                <label class="flex items-center gap-2 text-sm text-slate-700 cursor-pointer">
+                                    <input type="radio" name="represent_professionally" value="no" class="accent-sky-600" /> No
+                                </label>
+                            </div>
+                        </div>
+                        <div>
+                            <p class="text-sm text-slate-600 mb-1">Share your experience publicly (posts, blogs, talks)?</p>
+                            <div class="flex gap-6">
+                                <label class="flex items-center gap-2 text-sm text-slate-700 cursor-pointer">
+                                    <input type="radio" name="share_publicly" value="yes" required class="accent-sky-600" /> Yes
+                                </label>
+                                <label class="flex items-center gap-2 text-sm text-slate-700 cursor-pointer">
+                                    <input type="radio" name="share_publicly" value="no" class="accent-sky-600" /> No
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div>
+                    <label class="block text-sm font-medium text-slate-700 mb-1" for="represent_how">How will you represent {{ country_name }} at the conference? <span class="text-red-500">*</span></label>
+                    <textarea id="represent_how" name="represent_how" rows="4" required
+                        class="w-full rounded-lg border border-slate-300 px-4 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-sky-500 resize-y"></textarea>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section 6 -->
+        <section class="mb-8">
+            <h2 class="text-lg font-semibold text-slate-800 border-b border-slate-200 pb-2 mb-5">
+                Section 6 — Travel &amp; Documents
+            </h2>
+            <div class="space-y-4">
+                <div>
+                    <p class="text-sm font-medium text-slate-700 mb-2">Do you currently have a National ID? <span class="text-red-500">*</span></p>
+                    <div class="flex gap-6">
+                        <label class="flex items-center gap-2 text-sm text-slate-700 cursor-pointer">
+                            <input type="radio" name="has_national_id" value="yes" required class="accent-sky-600" /> Yes
+                        </label>
+                        <label class="flex items-center gap-2 text-sm text-slate-700 cursor-pointer">
+                            <input type="radio" name="has_national_id" value="no" class="accent-sky-600" /> No
+                        </label>
+                    </div>
+                </div>
+                <div>
+                    <p class="text-sm font-medium text-slate-700 mb-2">Do you currently have a valid Passport? <span class="text-red-500">*</span></p>
+                    <div class="space-y-2">
+                        <label class="flex items-center gap-2 text-sm text-slate-700 cursor-pointer">
+                            <input type="radio" name="has_passport" value="yes" required class="accent-sky-600" /> Yes
+                        </label>
+                        <label class="flex items-center gap-2 text-sm text-slate-700 cursor-pointer">
+                            <input type="radio" name="has_passport" value="willing_to_apply" class="accent-sky-600" /> No (I am willing to apply)
+                        </label>
+                        <label class="flex items-center gap-2 text-sm text-slate-700 cursor-pointer">
+                            <input type="radio" name="has_passport" value="cannot_apply" class="accent-sky-600" /> No (I cannot apply)
+                        </label>
+                    </div>
+                </div>
+                <div>
+                    <p class="text-sm font-medium text-slate-700 mb-2">Are you able to travel to Uganda if selected? <span class="text-red-500">*</span></p>
+                    <div class="flex gap-6">
+                        <label class="flex items-center gap-2 text-sm text-slate-700 cursor-pointer">
+                            <input type="radio" name="can_travel" value="yes" required class="accent-sky-600" /> Yes
+                        </label>
+                        <label class="flex items-center gap-2 text-sm text-slate-700 cursor-pointer">
+                            <input type="radio" name="can_travel" value="no" class="accent-sky-600" /> No
+                        </label>
+                    </div>
+                </div>
+                <div>
+                    <p class="text-sm font-medium text-slate-700 mb-2">Will you require financial support? <span class="text-slate-400 font-normal">(Select all that apply)</span></p>
+                    <div class="space-y-2">
+                        {% for val, label in support_choices %}
+                        <label class="flex items-center gap-2 text-sm text-slate-700 cursor-pointer">
+                            <input type="checkbox" name="financial_support" value="{{ val }}" class="accent-sky-600 rounded" /> {{ label }}
+                        </label>
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section 7 -->
+        <section class="mb-8">
+            <h2 class="text-lg font-semibold text-slate-800 border-b border-slate-200 pb-2 mb-5">
+                Section 7 — Final Submission
+            </h2>
+            <div>
+                <label class="block text-sm font-medium text-slate-700 mb-1" for="anything_else">Anything else you'd like us to know? <span class="text-slate-400 font-normal">(Optional)</span></label>
+                <textarea id="anything_else" name="anything_else" rows="4"
+                    class="w-full rounded-lg border border-slate-300 px-4 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-sky-500 resize-y"></textarea>
+            </div>
+        </section>
+
+        <button type="submit" id="submit-btn"
+            class="w-full rounded-full bg-sky-600 px-6 py-3 text-sm font-semibold text-white shadow-lg transition hover:bg-sky-700">
+            Submit Application
+        </button>
+    </form>
+</div>
+
+<script>
+    document.getElementById('age-no').addEventListener('change', function () {
+        document.getElementById('age-warning').classList.remove('hidden');
+        document.getElementById('submit-btn').disabled = true;
+        document.getElementById('submit-btn').classList.add('opacity-50', 'cursor-not-allowed');
+    });
+    document.querySelectorAll('input[name="is_18"]').forEach(function (el) {
+        if (el.value === 'yes') {
+            el.addEventListener('change', function () {
+                document.getElementById('age-warning').classList.add('hidden');
+                document.getElementById('submit-btn').disabled = false;
+                document.getElementById('submit-btn').classList.remove('opacity-50', 'cursor-not-allowed');
+            });
+        }
+    });
+</script>
+{% endblock %}
