@@ -5,7 +5,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 
 SECRET_KEY = "django-insecure-replace-this-with-a-secure-value"
 DEBUG = True
-ALLOWED_HOSTS = ["www.pssu.ug", "pssu.ug"]
+ALLOWED_HOSTS = ["www.pssu.ug", "pssu.ug", "127.0.0.1", "localhost"]
 
 INSTALLED_APPS = [
     "django.contrib.admin",
@@ -15,6 +15,7 @@ INSTALLED_APPS = [
     "django.contrib.messages",
     "django.contrib.staticfiles",
     "website",
+    "events",
 ]
 
 MIDDLEWARE = [
