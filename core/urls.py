@@ -5,6 +5,6 @@ from website import views
 urlpatterns = [
     path("admin/", admin.site.urls),
     path("", views.home, name="home"),
-    path("apply/<str:country>/", views.apply, name="apply"),
-    path("apply/<str:country>/success/", views.apply_success, name="apply_success"),
+    path("apply/", views.apply, name="apply"),
+    path("apply/success/", views.apply_success, name="apply_success"),
 ]

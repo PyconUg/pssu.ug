@@ -1,11 +1,10 @@
 from django.shortcuts import render, redirect
-from django.http import Http404
 
-COUNTRIES = {
-    'rwanda': 'Rwanda',
-    'kenya': 'Kenya',
-    'tanzania': 'Tanzania',
-}
+COUNTRIES = [
+    ('rwanda', 'Rwanda'),
+    ('kenya', 'Kenya'),
+    ('tanzania', 'Tanzania'),
+]
 
 STATUS_CHOICES = [
     ('student', 'Student'),
@@ -42,31 +41,25 @@ SUPPORT_CHOICES = [
     ('none', 'None'),
 ]
 
+FORM_CONTEXT = {
+    'countries': COUNTRIES,
+    'status_choices': STATUS_CHOICES,
+    'python_level_choices': PYTHON_LEVEL_CHOICES,
+    'python_duration_choices': PYTHON_DURATION_CHOICES,
+    'interest_choices': INTEREST_CHOICES,
+    'support_choices': SUPPORT_CHOICES,
+}
+
 
 def home(request):
     return render(request, "home.html")
 
 
-def apply(request, country):
-    if country not in COUNTRIES:
-        raise Http404
+def apply(request):
     if request.method == 'POST':
-        return redirect('apply_success', country=country)
-    return render(request, "apply.html", {
-        'country': country,
-        'country_name': COUNTRIES[country],
-        'status_choices': STATUS_CHOICES,
-        'python_level_choices': PYTHON_LEVEL_CHOICES,
-        'python_duration_choices': PYTHON_DURATION_CHOICES,
-        'interest_choices': INTEREST_CHOICES,
-        'support_choices': SUPPORT_CHOICES,
-    })
+        return redirect('apply_success')
+    return render(request, "apply.html", FORM_CONTEXT)
 
 
-def apply_success(request, country):
-    if country not in COUNTRIES:
-        raise Http404
-    return render(request, "apply_success.html", {
-        'country': country,
-        'country_name': COUNTRIES[country],
-    })
+def apply_success(request):
+    return render(request, "apply_success.html")
