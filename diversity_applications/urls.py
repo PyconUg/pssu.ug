@@ -6,5 +6,5 @@ app_name = 'diversity_applications'
 
 urlpatterns = [
     path('', views.apply, name='apply'),
-    path('success/<int:application_id>/', views.apply_success, name='apply_success'),
+    path('success/<uuid:application_id>/', views.apply_success, name='apply_success'),
 ]

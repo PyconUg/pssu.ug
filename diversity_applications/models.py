@@ -1,6 +1,5 @@
+import uuid
 from django.db import models
-from django.core.validators import EmailValidator, MinValueValidator, MaxValueValidator
-from django.utils import timezone
 from datetime import date
 
 from .constants import (
@@ -15,6 +14,7 @@ from .constants import (
 
 
 class Application(models.Model):
+    id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
     country = models.CharField(
         max_length=50,
         choices=COUNTRIES,
