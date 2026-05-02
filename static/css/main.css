@@ -1,5 +1,8 @@
 @import "tailwindcss";
 
+@source "../../**/*.py";
+@source "../../templates/**/*.html";
+
 @theme {
     --color-pssu-blue: #3b82f6;
     --color-pssu-green: #22c55e;
