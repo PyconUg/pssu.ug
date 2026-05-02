@@ -15,7 +15,7 @@ def apply(request):
                 request,
                 f"Thank you for your application! We'll review it and get back to you soon."
             )
-            return redirect('apply_success', application_id=application.id)
+            return redirect('diversity_applications:apply_success', application_id=application.id)
         else:
             messages.error(request, "Please fix the errors below and try again.")
     else:
