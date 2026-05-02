@@ -126,9 +126,13 @@
         </section>
 
         <div class="flex justify-center pt-4">
-            <button type="submit" 
-                class="inline-flex items-center justify-center rounded-full bg-sky-600 px-8 py-3 text-sm font-semibold text-white shadow-lg transition hover:bg-sky-700">
-                Submit Application
+            <button type="submit" id="submit-btn"
+                class="inline-flex items-center justify-center gap-2 rounded-full bg-sky-600 px-8 py-3 text-sm font-semibold text-white shadow-lg transition hover:bg-sky-700 disabled:opacity-60 disabled:cursor-not-allowed">
+                <svg id="submit-spinner" class="hidden h-4 w-4 animate-spin" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                    <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+                    <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4z"></path>
+                </svg>
+                <span id="submit-label">Submit Application</span>
             </button>
         </div>
     </form>
@@ -143,6 +147,15 @@
         field.addEventListener('change', function() {
             this.classList.remove('ring-2', 'ring-red-500');
         });
+    });
+
+    document.querySelector('form').addEventListener('submit', function() {
+        const btn = document.getElementById('submit-btn');
+        const spinner = document.getElementById('submit-spinner');
+        const label = document.getElementById('submit-label');
+        btn.disabled = true;
+        spinner.classList.remove('hidden');
+        label.textContent = 'Submitting…';
     });
 </script>
 {% endblock %}
