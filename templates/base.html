@@ -12,9 +12,8 @@
         <div class="mx-auto max-w-7xl px-6 py-5 flex items-center justify-between">
             <a href="/" class="text-xl font-semibold text-slate-900 no-underline hover:no-underline">PSSU</a>
             <nav class="flex items-center gap-6">
-                <a href="#about" class="text-slate-600 hover:text-slate-900 no-underline text-sm font-medium">About</a>
-
-                <a href="{% url 'diversity_applications:apply' %}" class="text-slate-600 hover:text-slate-900 no-underline text-sm font-medium">Apply</a>
+                <a href="{% url 'events:index' %}" class="text-slate-600 hover:text-slate-900 no-underline text-sm font-medium">Events</a>
+                <a href="{% url 'diversity_applications:apply' %}" class="inline-flex items-center justify-center rounded-full bg-sky-600 px-4 py-2 text-sm font-semibold text-white shadow-sm transition hover:bg-sky-700 no-underline">Apply</a>
             </nav>
         </div>
     </header>
