@@ -94,7 +94,7 @@ class ApplicationAdmin(admin.ModelAdmin):
         ('Support', {
             'fields': (
                 'financial_support',
-                'anything_else',
+                'additional_notes',
             ),
             'classes': ('collapse',),
         }),

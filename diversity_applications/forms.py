@@ -47,7 +47,7 @@ class ApplicationForm(forms.ModelForm):
             'has_passport',
             'can_travel',
             'financial_support',
-            'anything_else',
+            'additional_notes',
         ]
         widgets = {
             'country': forms.Select(attrs={'class': 'form-control'}),
@@ -115,7 +115,7 @@ class ApplicationForm(forms.ModelForm):
             'has_passport': forms.CheckboxInput(attrs={'class': 'form-check-input'}),
             'can_travel': forms.CheckboxInput(attrs={'class': 'form-check-input'}),
             'financial_support': forms.Select(attrs={'class': 'form-control'}),
-            'anything_else': forms.Textarea(attrs={
+            'additional_notes': forms.Textarea(attrs={
                 'class': 'form-control',
                 'rows': 3,
                 'placeholder': 'Optional: Tell us anything else about yourself',

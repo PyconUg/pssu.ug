@@ -124,10 +124,10 @@ class Application(models.Model):
         help_text="Select the type of support you may need"
     )
 
-    anything_else = models.TextField(
+    additional_notes = models.TextField(
         blank=True,
         null=True,
-        verbose_name="Anything else you'd like us to know?",
+        verbose_name="Additional notes",
         help_text="Optional: Additional information about yourself"
     )
 

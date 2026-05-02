@@ -1,9 +1,13 @@
 from django.shortcuts import render, redirect
 from django.views.decorators.http import require_http_methods
 from django.contrib import messages
-
 from .forms import ApplicationForm
 from .models import Application
+
+
+def home(request):
+    """Render the home page."""
+    return render(request, "home.html")
 
 
 @require_http_methods(["GET", "POST"])
