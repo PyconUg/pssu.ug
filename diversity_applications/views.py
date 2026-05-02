@@ -5,11 +5,6 @@ from .forms import ApplicationForm
 from .models import Application
 
 
-def home(request):
-    """Render the home page."""
-    return render(request, "home.html")
-
-
 @require_http_methods(["GET", "POST"])
 def apply(request):
     if request.method == 'POST':
