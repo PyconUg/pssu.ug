@@ -5,7 +5,13 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 
 SECRET_KEY = "django-insecure-replace-this-with-a-secure-value"
 DEBUG = True
-ALLOWED_HOSTS = ["www.pssu.ug", "pssu.ug", "127.0.0.1", "localhost"]
+ALLOWED_HOSTS = [
+    "www.pssu.ug",
+    "pssu.ug",
+    "127.0.0.1",
+    "localhost",
+    "pyconuganda.pythonanywhere.com",
+]
 
 INSTALLED_APPS = [
     "django.contrib.admin",
